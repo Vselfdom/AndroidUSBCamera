@@ -22,6 +22,7 @@ import java.util.List;
 /** UVCCamera Helper class
  *
  * Created by jiangdongguo on 2017/9/30.
+ * reCreated by Vselfdom on 2019/11/08.
  */
 
 public class UVCCameraHelper {
