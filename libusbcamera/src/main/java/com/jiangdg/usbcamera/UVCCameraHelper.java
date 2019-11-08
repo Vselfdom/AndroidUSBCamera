@@ -327,7 +327,13 @@ public class UVCCameraHelper {
             mCameraHandler.startCameraFoucs();
         }
     }
-
+    
+    public void startCameraFoucs(boolean autoWhiteBlance) {
+        if (mCameraHandler != null) {
+            mCameraHandler.setAutoWhiteBlance(autoWhiteBlance);
+        }
+    }
+    
     public List<Size> getSupportedPreviewSizes() {
         if (mCameraHandler == null)
             return null;
