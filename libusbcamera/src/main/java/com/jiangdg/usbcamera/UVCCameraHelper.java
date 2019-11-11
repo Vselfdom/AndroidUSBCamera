@@ -329,9 +329,9 @@ public class UVCCameraHelper {
         }
     }
     
-    public void startCameraFoucs(boolean autoWhiteBlance) {
+    public void cancelCameraWhiteBlance() {
         if (mCameraHandler != null) {
-            mCameraHandler.setAutoWhiteBlance(autoWhiteBlance);
+            mCameraHandler.cancelCameraWhiteBlance();
         }
     }
     

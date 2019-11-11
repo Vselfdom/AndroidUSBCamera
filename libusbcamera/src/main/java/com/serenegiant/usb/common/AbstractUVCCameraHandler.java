@@ -103,6 +103,8 @@ public abstract class AbstractUVCCameraHandler extends Handler {
     private static final int MSG_MEDIA_UPDATE = 7;
     private static final int MSG_RELEASE = 9;
     private static final int MSG_CAMERA_FOUCS = 10;
+    private static final int MSG_CAMERA_WHITEBLANCE = 11;
+
     // 音频线程
 //	private static final int MSG_AUDIO_START = 10;
 //	private static final int MSG_AUDIO_STOP = 11;
@@ -249,6 +251,10 @@ public abstract class AbstractUVCCameraHandler extends Handler {
         sendEmptyMessage(MSG_CAMERA_FOUCS);
     }
 
+    public void cancelCameraWhiteBlance() {
+        sendEmptyMessage(MSG_CAMERA_WHITEBLANCE);
+    }
+
     public List<Size> getSupportedPreviewSizes() {
         return mWeakThread.get().getSupportedSizes();
     }
@@ -382,6 +388,10 @@ public abstract class AbstractUVCCameraHandler extends Handler {
             // 自动对焦
             case MSG_CAMERA_FOUCS:
                 thread.handleCameraFoucs();
+                break;
+            // 取消白平衡
+            case MSG_CAMERA_WHITEBLANCE:
+                thread.handleCameraWhiteBlance();
                 break;
             default:
                 throw new RuntimeException("unsupported message:what=" + msg.what);
@@ -891,6 +901,14 @@ public abstract class AbstractUVCCameraHandler extends Handler {
             if ((mUVCCamera == null) || !mIsPreviewing)
                 return;
             mUVCCamera.setAutoFocus(true);
+        }
+
+        // 取消白平衡
+        public void handleCameraWhiteBlance() {
+            if (DEBUG) Log.v(TAG_THREAD, "handleStartPreview:");
+            if ((mUVCCamera == null) || !mIsPreviewing)
+                return;
+            mUVCCamera.setAutoFocus(false);
         }
 
         // 获取支持的分辨率
